@@ -1,6 +1,7 @@
-import openai
 import streamlit as st
 from streamlit_chat import message
+
+#Source : https://towardsdatascience.com/build-your-own-chatgpt-like-app-with-streamlit-20d940417389
 
 # Setting page title and header
 st.set_page_config(page_title="AVA", page_icon=":robot_face:")
