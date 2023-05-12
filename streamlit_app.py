@@ -17,6 +17,7 @@ if 'messages' not in st.session_state:
         {"role": "system", "content": "You are a helpful assistant."}
     ]
     
+clear_button = st.sidebar.button("Clear Conversation", key="clear")
 # reset everything
 if clear_button:
     st.session_state['generated'] = []
