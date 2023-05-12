@@ -50,7 +50,7 @@ if st.session_state['generated']:
             message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
             message(st.session_state["generated"][i], key=str(i))
             
-clear_button = st.sidebar.button("Clear Conversation", key="clear")
+clear_button = st.button("Clear Conversation", key="clear")
 # reset everything
 if clear_button:
     st.session_state['generated'] = []
