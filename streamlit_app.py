@@ -4,14 +4,14 @@ from streamlit_chat import message
 #Source : https://towardsdatascience.com/build-your-own-chatgpt-like-app-with-streamlit-20d940417389
 
 # Setting page title and header
-st.set_page_config(page_title="AVA", page_icon=":robot_face:")
-st.markdown("<h1 style='text-align: center;'>AVA - a totally harmless chatbot 😬</h1>", unsafe_allow_html=True)
+st.set_page_config(page_title="BOB", page_icon=":robot_face:")
+st.markdown("<h1 style='text-align: center;'>BOB - a totally harmless chatbob 😬</h1>", unsafe_allow_html=True)
 
 # Initialise session state variables
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
+if 'bot_answers' not in st.session_state:
+    st.session_state['bot_answers'] = []
+if 'user_prompt' not in st.session_state:
+    st.session_state['user_prompt'] = []
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
         {"role": "system", "content": "You are a helpful assistant."}
@@ -24,10 +24,7 @@ def generate_response(prompt):
 
     response = 'Dummy response'
     st.session_state['messages'].append({"role": "assistant", "content": response})
-
-    
     return response
-
 
 # container for chat history
 response_container = st.container()
@@ -41,20 +38,20 @@ with container:
 
     if submit_button and user_input:
         output = generate_response(user_input)
-        st.session_state['past'].append(user_input)
-        st.session_state['generated'].append(output)
+        st.session_state['user_prompt'].append(user_input)
+        st.session_state['bot_answers'].append(output)
 
 if st.session_state['generated']:
     with response_container:
-        for i in range(len(st.session_state['generated'])):
-            message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
-            message(st.session_state["generated"][i], key=str(i))
+        for i in range(len(st.session_state['bot_answers'])):
+            message(st.session_state["user_prompt"][i], is_user=True, key=str(i) + '_user')
+            message(st.session_state["bot_answers"][i], key=str(i))
             
 clear_button = st.button("Clear Conversation", key="clear")
 # reset everything
 if clear_button:
-    st.session_state['generated'] = []
-    st.session_state['past'] = []
+    st.session_state['bot_answers'] = []
+    st.session_state['user_prompt'] = []
     st.session_state['messages'] = [
         {"role": "system", "content": "You are a helpful assistant."}
     ]
